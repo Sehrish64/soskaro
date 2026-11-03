@@ -1,5 +1,5 @@
 /* SOSKaro service worker — cache-first, everything offline after first visit. */
-var CACHE = "soskaro-v1";
+var CACHE = "soskaro-v2";
 var ASSETS = ["./", "./index.html", "./sw.js"];
 
 self.addEventListener("install", function (e) {

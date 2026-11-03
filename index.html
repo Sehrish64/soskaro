@@ -44,10 +44,11 @@
   .hrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:24px 0 4px}
   .wordmark{font-family:var(--fd);font-weight:500;font-size:20px;letter-spacing:.01em}
   .wordmark b{color:var(--red);font-weight:700}
+  .wdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-left:7px;vertical-align:middle;box-shadow:0 0 10px var(--glow)}
   .pill{
     display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 12px;
     font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;
-    background:var(--surface);color:var(--t2);border:1px solid var(--line);transition:all .4s;
+    background:var(--surface);color:var(--t2);border:1px solid rgba(255,255,255,.14);transition:all .4s;
   }
   .pill .dot{width:9px;height:9px;border-radius:50%;background:var(--mut);flex:0 0 auto}
   .pill.on{background:var(--okbg);color:#8FE3A5}
@@ -65,17 +66,22 @@
   .hint .x{position:absolute;top:8px;inset-inline-end:10px;font-size:22px;color:#FFE1B0;padding:6px;line-height:1}
   /* ---------- SOS button ---------- */
   .sosWrap{position:relative;width:232px;height:232px;margin:32px auto 0}
+  .sosWrap::before{
+    content:"";position:absolute;inset:-58px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle at 50% 50%, rgba(255,59,48,.20), rgba(255,59,48,.06) 46%, rgba(255,59,48,0) 70%);
+  }
   .sosWrap svg{position:absolute;inset:0;transform:rotate(-90deg);pointer-events:none}
   .sosWrap svg .ringbg{fill:none;stroke:rgba(255,255,255,.10);stroke-width:3}
   .sosWrap svg .ringfg{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;opacity:0}
   #sosBtn{
     position:absolute;top:16px;left:16px;width:200px;height:200px;border-radius:50%;
-    background:radial-gradient(circle at 50% 32%, var(--red4), var(--red) 62%, var(--red6));
+    background:linear-gradient(180deg, var(--red4) 0%, var(--red) 55%, var(--red6) 100%);
     color:#fff;font-family:var(--fd);font-weight:700;font-size:48px;letter-spacing:.02em;
-    box-shadow:var(--sh-sos);transition:transform .12s, box-shadow .2s, background .15s;
+    box-shadow:inset 0 2px 3px rgba(255,255,255,.38), inset 0 -20px 30px rgba(0,0,0,.20), var(--sh-sos);
+    transition:transform .12s, box-shadow .2s, background .15s;
     touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
   }
-  #sosBtn.pressing{transform:scale(.94);box-shadow:var(--sh-sos-on)}
+  #sosBtn.pressing{transform:scale(.94);box-shadow:inset 0 2px 3px rgba(255,255,255,.25), inset 0 -14px 24px rgba(0,0,0,.22), var(--sh-sos-on)}
   .sosSub{margin-top:12px;text-align:center}
   .sosSub .a{font-size:16px;color:var(--t2)}
   .sosSub .b{font-size:16px;color:var(--t2);opacity:.4;font-style:italic;margin-top:2px}
@@ -94,15 +100,19 @@
   .tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
   .tile{
     background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;
-    min-height:118px;text-align:start;box-shadow:var(--sh-card);
+    min-height:118px;text-align:start;box-shadow:var(--sh-card), inset 0 1px 0 rgba(255,255,255,.045);
     display:flex;flex-direction:column;gap:6px;justify-content:center;transition:transform .12s, background .15s;
   }
   .tile:active{background:var(--pressed);transform:scale(.98)}
-  .tile .ic{color:var(--red4)}
-  .tile .ic svg{width:28px;height:28px;display:block}
-  .tile.green .ic{color:var(--ok)}
-  .tile.blue .ic{color:#5EB1FF}
-  .tile.amber .ic{color:var(--warn)}
+  .tile .ic{
+    display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;
+    background:rgba(255,92,82,.14);color:var(--red4);
+  }
+  .tile .ic svg{width:24px;height:24px;display:block}
+  .tile.green .ic{background:rgba(52,199,89,.15);color:var(--ok)}
+  .tile.blue .ic{background:rgba(94,177,255,.15);color:#5EB1FF}
+  .tile.amber .ic{background:rgba(255,149,0,.15);color:var(--warn)}
+  .tile.violet .ic{background:rgba(175,130,255,.16);color:#C4A1FF}
   .tile .lb{font-size:16px;font-weight:700;line-height:1.25}
   .tile .ur{font-size:14px;color:var(--mut);line-height:1.3}
   footer{text-align:center;color:var(--mut);font-size:13px;margin-top:32px;line-height:1.65}
@@ -118,7 +128,7 @@
   .ssub{color:var(--t2);font-size:16px;margin-top:2px}
   .card{
     background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;
-    margin-top:20px;box-shadow:var(--sh-card);
+    margin-top:20px;box-shadow:var(--sh-card), inset 0 1px 0 rgba(255,255,255,.045);
   }
   .card p{color:var(--t2);font-size:16px;line-height:1.55}
   .card p+p{margin-top:10px}
@@ -140,6 +150,8 @@
     display:inline-flex;align-items:center;gap:7px;background:var(--okbg);color:#8FE3A5;border-radius:999px;
     padding:7px 14px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px;
   }
+  .lockpill.approx{background:var(--warnbg);color:#FFC478}
+  #refineNote{display:none;text-align:center;color:#FFC478;font-size:15px;line-height:1.5;margin:-4px 0 4px}
   .btnrow{display:flex;gap:12px;margin-top:16px}
   .btn{
     flex:1;border-radius:16px;padding:16px 10px;font-size:18px;font-weight:700;text-transform:uppercase;
@@ -165,7 +177,7 @@
   textarea{min-height:78px;resize:vertical}
   #saveMsg{color:#8FE3A5;font-size:16px;text-align:center;margin-top:14px;min-height:22px}
   /* info view */
-  .infoCard{background:var(--elev);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px;box-shadow:var(--sh-raise)}
+  .infoCard{background:var(--elev);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px;box-shadow:var(--sh-raise), inset 0 1px 0 rgba(255,255,255,.045)}
   .infoCard .k{color:var(--mut);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
   .infoCard .v{font-size:26px;font-weight:600;line-height:1.4;margin-top:4px}
   .infoCard .v a{color:#5EB1FF;text-decoration:none;font-family:var(--fd)}
@@ -214,7 +226,7 @@
 <!-- ================= HOME ================= -->
 <section class="screen active" id="homeScreen">
   <div class="hrow">
-    <div class="wordmark"><b>SOS</b>Karo</div>
+    <div class="wordmark"><b>SOS</b>Karo<span class="wdot"></span></div>
     <span class="pill" id="netPill"><span class="dot"></span><span id="netPillTxt">…</span></span>
   </div>
   <p class="tagline">Baghair internet ke madad — Emergency help, even without internet</p>
@@ -245,19 +257,19 @@
   </div>
 
   <div class="tiles">
-    <button class="tile blue" id="tileLoc">
+    <button class="tile green" id="tileLoc">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
       <span class="lb">My Location</span><span class="ur">Meri ja-gaah</span>
     </button>
-    <button class="tile green" id="tileOk">
+    <button class="tile blue" id="tileOk">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
       <span class="lb">Main Theek Hun</span><span class="ur">Ghar walo ko SMS</span>
     </button>
-    <button class="tile" id="tileInfo">
+    <button class="tile amber" id="tileInfo">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.5-9C1 8 3 4.5 6.5 4.5c2 0 3.5 1 4.5 2.5 1-1.5 2.5-2.5 4.5-2.5C19 4.5 21 8 20.5 12c-1 4.4-8.5 9-8.5 9Z"/></svg></span>
       <span class="lb">Meri Maloomat</span><span class="ur">Khoon, dawa, number</span>
     </button>
-    <button class="tile amber" id="tileGuide">
+    <button class="tile violet" id="tileGuide">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span>
       <span class="lb">Guide</span><span class="ur">Rahnumai — hifazat ke tareeqe</span>
     </button>
@@ -281,13 +293,16 @@
 
   <div class="card" id="searchCard">
     <div class="spinner" id="locSpinner"></div>
-    <p class="searchTxt" id="locStatus">🛰️ Satellite dhoondh raha hai… sabr karein — aasman ke neeche / khirki ke paas jayein. Pehli dafa 1–3 minute lag sakte hain.<br><span style="color:var(--mut)">Searching… please wait, the first fix can take 1–3 minutes.</span></p>
-    <p class="failTxt" id="locFail">⚠️ Location nahi mili. Ye karein:<br>1) Phone ki Location / GPS on karein.<br>2) Khuli jagah, aasman ke neeche jayein — ghani imaraton mein GPS kamzor hota hai.<br>3) Phir neeche wala button dobara dabayein.</p>
+    <p class="searchTxt" id="locStatus"></p>
+    <p class="failTxt" id="failPerm">📍 <b>Location ki ijazat band hai.</b> Ye karein:<br>1) Browser ke menu (⋮) dabayein → <b>Settings</b> → <b>Site settings</b> → <b>Location</b> — wahan <b>SOSKaro</b> ko <b>Allow</b> karein.<br>2) Phone ki apni <b>Location</b> bhi ON rakhein.<br>3) Phir neeche wala button dobara dabayein.<br><span style="color:var(--mut)">Permission is off — allow Location for this site in browser settings, then retry.</span></p>
+    <p class="failTxt" id="failUnavail">📍 <b>Phone ki Location ON karein.</b> Ye karein:<br>1) Upar wale panel ko neeche kheench kar <b>Location / GPS</b> wala button ON karein (ya phone ki Settings se).<br>2) Khuli jagah, aasman ke neeche jayein — ghani imaraton mein GPS kamzor hota hai.<br>3) Phir neeche wala button dobara dabayein.<br><span style="color:var(--mut)">Turn the phone's Location ON, go near open sky, then retry.</span></p>
+    <p class="failTxt" id="failTimeout">⚠️ <b>Satellite ko waqt lag gaya</b> — location nahi mili. Ye karein:<br>1) Phone ki Location / GPS on karein.<br>2) Khuli jagah, aasman ke neeche jayein — ghani imaraton mein GPS kamzor hota hai.<br>3) Phir neeche wala button dobara dabayein.</p>
     <button class="btn solo" id="locRetry" style="display:none">🔄 Phir Koshish Karein — Retry</button>
   </div>
 
   <div class="card" id="coordCard">
-    <div><span class="lockpill">● GPS Lock Acquired</span></div>
+    <div><span class="lockpill" id="lockPill">● ASAL GPS JAGAH — GPS Lock</span></div>
+    <p id="refineNote">🛰️ GPS se aur durust jagah talash ho rahi hai…</p>
     <div class="coords"><span id="coordLat"></span><br><span id="coordLng"></span>
       <small id="coordAcc"></small>
     </div>
@@ -445,7 +460,7 @@ function show(name){
   window.scrollTo(0,0);
 }
 document.querySelectorAll("[data-home]").forEach(function(b){
-  b.addEventListener("click", function(){ show("homeScreen"); });
+  b.addEventListener("click", function(){ locCleanup(); show("homeScreen"); });
 });
 
 /* ---------- speech (Urdu audio guidance) ---------- */
@@ -531,42 +546,127 @@ function renderInfo(){
 $("tileInfo").addEventListener("click", function(){ renderInfo(); show("infoScreen"); });
 $("tileGuide").addEventListener("click", function(){ show("guideScreen"); });
 
-/* ---------- location ---------- */
+/* ---------- location — 2-stage flow ----------
+   Stage 1: fast approximate fix (network / cached), shown immediately.
+   Stage 2: precise GPS fix replaces it when it lands.
+   A watchPosition safety net runs while searching; once ANY fix is shown,
+   no failure screen can appear — later failures just stop the refining. */
 var lastCoords = null;
+var locFlow = { watchId: null, secTimer: null, deadline: null };
 function fmtCoord(lat, lng){
   return {
     a: Math.abs(lat).toFixed(4) + "° " + (lat >= 0 ? "N" : "S"),
     b: Math.abs(lng).toFixed(4) + "° " + (lng >= 0 ? "E" : "W")
   };
 }
+function locStopWatch(){
+  if (locFlow.watchId !== null) {
+    try { navigator.geolocation.clearWatch(locFlow.watchId); } catch(e){}
+    locFlow.watchId = null;
+  }
+}
+function locStopTimers(){
+  if (locFlow.secTimer) { clearInterval(locFlow.secTimer); locFlow.secTimer = null; }
+  if (locFlow.deadline) { clearTimeout(locFlow.deadline); locFlow.deadline = null; }
+}
+function locCleanup(){ locStopWatch(); locStopTimers(); }
+function applyFix(pos, precise){
+  var lat = pos.coords.latitude, lng = pos.coords.longitude;
+  var acc = pos.coords.accuracy ? Math.round(pos.coords.accuracy) : 0;
+  lastCoords = { lat: lat, lng: lng, acc: acc };
+  var f = fmtCoord(lat, lng);
+  $("coordLat").textContent = f.a;
+  $("coordLng").textContent = f.b;
+  $("coordAcc").textContent = lat.toFixed(6) + ", " + lng.toFixed(6) + (acc ? "  ·  takreeban " + acc + " m ke andar" : "");
+  var link = "https://maps.google.com/?q=" + lat.toFixed(6) + "," + lng.toFixed(6);
+  var ml = $("mapLink"); ml.href = link; ml.textContent = link;
+  $("qrBox").style.display = "none"; $("qrBox").innerHTML = "";
+  var pill = $("lockPill");
+  if (precise) { pill.className = "lockpill"; pill.textContent = "● ASAL GPS JAGAH — GPS Lock"; }
+  else { pill.className = "lockpill approx"; pill.textContent = "● ANDAAZAN JAGAH — Network Se"; }
+  $("searchCard").style.display = "none";
+  $("coordCard").classList.add("show");
+}
 function startLocation(){
   show("locScreen");
+  locCleanup();
+  var haveFix = false, flowOver = false, s1Done = false, s2Done = false, lastErr = 0;
+  /* reset UI into searching state */
   $("searchCard").style.display = "block";
   $("coordCard").classList.remove("show");
-  $("locSpinner").style.display = "block";
-  $("locFail").classList.remove("show");
+  $("refineNote").style.display = "none";
+  ["failPerm","failUnavail","failTimeout"].forEach(function(id){ $(id).classList.remove("show"); });
   $("locRetry").style.display = "none";
-  $("locStatus").style.display = "block";
-  if (!("geolocation" in navigator)) { locFailed(); return; }
+  $("locSpinner").style.display = "block";
+  var status = $("locStatus");
+  status.style.display = "block";
+  status.innerHTML = "🛰️ Talash jari hai… <b id=\"locSecs\">0</b>s<br>Khuli jagah / khirki ke paas GPS jaldi milta hai.<br><span style=\"color:var(--mut)\">Searching… open sky helps. Pehli dafa thora waqt lag sakta hai.</span>";
+  var t0 = Date.now();
+  locFlow.secTimer = setInterval(function(){
+    var el = $("locSecs");
+    if (!el) { if (locFlow.secTimer) { clearInterval(locFlow.secTimer); locFlow.secTimer = null; } return; }
+    el.textContent = String(Math.floor((Date.now() - t0) / 1000));
+  }, 500);
+  function finishFail(kind){
+    if (flowOver || haveFix) return;
+    flowOver = true;
+    locCleanup();
+    $("locSpinner").style.display = "none";
+    status.style.display = "none";
+    $(kind).classList.add("show");
+    $("locRetry").style.display = "block";
+  }
+  function failFromErr(code){
+    if (code === 1) finishFail("failPerm");
+    else if (code === 2) finishFail("failUnavail");
+    else finishFail("failTimeout");
+  }
+  function onApprox(pos){
+    if (haveFix || flowOver) return;
+    haveFix = true;
+    locStopWatch();
+    locStopTimers();
+    applyFix(pos, false);
+    $("refineNote").style.display = "block";
+    /* Stage 2 — precise GPS; its failure only stops the refining note */
+    navigator.geolocation.getCurrentPosition(function(p2){
+      if (s2Done) return; s2Done = true;
+      applyFix(p2, true);
+      $("refineNote").style.display = "none";
+    }, function(){
+      if (s2Done) return; s2Done = true;
+      $("refineNote").style.display = "none";
+    }, { enableHighAccuracy: true, timeout: 90000, maximumAge: 0 });
+  }
+  if (!("geolocation" in navigator)) { finishFail("failUnavail"); return; }
+  /* Stage 1 — fast approximate fix */
   navigator.geolocation.getCurrentPosition(function(pos){
-    var lat = pos.coords.latitude, lng = pos.coords.longitude;
-    lastCoords = { lat: lat, lng: lng, acc: Math.round(pos.coords.accuracy || 0) };
-    var f = fmtCoord(lat, lng);
-    $("coordLat").textContent = f.a;
-    $("coordLng").textContent = f.b;
-    $("coordAcc").textContent = lat.toFixed(6) + ", " + lng.toFixed(6) + (lastCoords.acc ? "  ·  takreeban " + lastCoords.acc + " m ke andar" : "");
-    var link = "https://maps.google.com/?q=" + lat.toFixed(6) + "," + lng.toFixed(6);
-    var ml = $("mapLink"); ml.href = link; ml.textContent = link;
-    $("qrBox").style.display = "none"; $("qrBox").innerHTML = "";
-    $("searchCard").style.display = "none";
-    $("coordCard").classList.add("show");
-  }, locFailed, { enableHighAccuracy: true, timeout: 150000, maximumAge: 30000 });
-}
-function locFailed(){
-  $("locSpinner").style.display = "none";
-  $("locStatus").style.display = "none";
-  $("locFail").classList.add("show");
-  $("locRetry").style.display = "block";
+    if (s1Done) return; s1Done = true;
+    onApprox(pos);
+  }, function(err){
+    if (s1Done) return; s1Done = true;
+    if (haveFix || flowOver) return;
+    lastErr = (err && err.code) ? err.code : 0;
+    if (lastErr === 1) failFromErr(1); /* permission denied is final for every method */
+    /* codes 2/3: the watch net may still deliver — the deadline decides */
+  }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 120000 });
+  /* Safety net — first watch fix with accuracy <= 150 m counts as Stage-1 success */
+  try {
+    locFlow.watchId = navigator.geolocation.watchPosition(function(pos){
+      if (haveFix || flowOver) return;
+      var acc = pos.coords.accuracy;
+      if (acc && acc <= 150) onApprox(pos);
+    }, function(err){
+      if (haveFix || flowOver) return;
+      if (err && err.code) lastErr = err.code;
+      if (err && err.code === 1) failFromErr(1);
+    }, { enableHighAccuracy: true, maximumAge: 0 });
+  } catch(e){}
+  /* Hard deadline — after 90 s show the card matching the last error seen */
+  locFlow.deadline = setTimeout(function(){
+    locFlow.deadline = null;
+    if (!haveFix && !flowOver) failFromErr(lastErr || 3);
+  }, 90000);
 }
 $("tileLoc").addEventListener("click", startLocation);
 $("locRetry").addEventListener("click", startLocation);
